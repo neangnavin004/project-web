@@ -6,8 +6,131 @@
     <title>Kizzz | Home</title>
     <!-- link exteternal output.css style -->
     <link rel="stylesheet" href="./src/output.css" />
-  </head>
-  <body>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: '#16a34a',
+            'brand-light': '#22c55e',
+          },
+          keyframes: {
+            'fade-up': { from: { opacity: '0', transform: 'translateY(30px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+            'fade-in': { from: { opacity: '0' }, to: { opacity: '1' } },
+            'float': { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-14px)' } },
+            'spin-slow': { from: { transform: 'rotate(0deg)' }, to: { transform: 'rotate(360deg)' } },
+          },
+          animation: {
+            'fade-up': 'fade-up 0.7s ease forwards',
+            'fade-up-2': 'fade-up 0.7s ease 0.15s forwards',
+            'fade-up-3': 'fade-up 0.7s ease 0.3s forwards',
+            'fade-in': 'fade-in 0.5s ease forwards',
+            'float': 'float 5s ease-in-out infinite',
+            'spin-slow': 'spin-slow 18s linear infinite',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* smooth transitions for dark/light */
+    *, *::before, *::after { transition: background-color 0.3s, border-color 0.3s, color 0.2s; }
+    body { font-family: 'DM Sans', sans-serif; }
+    h1,h2,h3,.font-display { font-family: 'Syne', sans-serif; }
+
+    /* Light mode */
+    :root {
+      --bg: #f8f9fa;
+      --nav-bg: #ffffff;
+      --card-bg: #ffffff;
+      --text: #1a2332;
+      --muted: #6b7280;
+      --border: rgba(0,0,0,0.08);
+    }
+    /* Dark mode */
+    .dark {
+      --bg: #0a0f1a;
+      --nav-bg: #0f1724;
+      --card-bg: #111d2e;
+      --text: #f0f6ff;
+      --muted: #8899aa;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    body { background: var(--bg); color: var(--text); }
+
+    /* Navbar pill */
+    .nav-pill {
+      background: var(--nav-bg);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .dark .nav-pill { box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+
+    /* Cards */
+    .drink-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .drink-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+    .dark .drink-card:hover { box-shadow: 0 16px 40px rgba(0,0,0,0.5); }
+
+    /* Toggle button */
+    .theme-toggle {
+      position: relative;
+      width: 52px; height: 28px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .dark .theme-toggle { background: #22c55e; }
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 22px; height: 22px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .dark .theme-toggle::after { transform: translateX(24px); }
+
+    /* Blob bg */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .dark .blob { opacity: 0.2; }
+
+    /* Decorative ring */
+    .ring-deco {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed rgba(22,163,74,0.25);
+      animation: spin-slow 18s linear infinite;
+    }
+
+    /* Opacity-0 initial for animations */
+    .anim-init { opacity: 0; }
+
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+  </style>
+
+  <body class="min-h-screen overflow-x-hidden">
     <!-- header (nav) -->
     <nav class="relative z-50 w-full max-w-7xl mx-auto mt-6 px-4">
       <div
@@ -21,10 +144,21 @@
           class="hidden md:flex gap-8 text-sm text-primary-size font-semibold text-gray-600"
         >
           <a href="./index.html" class="hover:text-green-600">Home </a>
-          <a href="./pages/product.html" class="hover:text-green-600"
+          <a href="#Product" class="hover:text-green-600"
             >Product
           </a>
           <a href="./pages/about.html" class="hover:text-green-600">About Us</a>
+        </div>
+
+           <!-- Right side -->
+      <div class="flex items-center gap-4 shrink-0">
+        <!-- Dark/light toggle -->
+        <div class="flex items-center gap-2">
+          <!-- Sun icon -->
+          <svg id="icon-sun" class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+          <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode"></div>
+          <!-- Moon icon -->
+          <svg id="icon-moon" class="w-4 h-4" style="color:var(--muted);" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
         </div>
 
         <a
@@ -80,7 +214,7 @@
           <!-- Right Content -->
           <div class="relative">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi_yP0rHf0dsYCfjUCbj1R9p7pSzmynqeZLQ&s"
+              src="./Photo/img1.png"
               alt="Acorns Mobile"
               loading="lazy"
               class="relative z-10 mx-auto w-[500px] h-[500px]"
@@ -97,7 +231,7 @@
 
         <!-- ✅ Grid Section - Starts Here 👇 -->
         <section
-          id="Projects"
+          id="Product"
           class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5"
         >
           <!--   ✅ Product card 1 - Starts Here 👇 -->
@@ -433,9 +567,9 @@
             abundance of fruit pulp, offering a rich taste experience
           </p>
           <img
-            src="https://cdn.yamibuy.net/item/0751b1d99f2efbe9f8095d60608509f6_1200x1200.webp"
+            src="./Photo/img2.png"
             alt=""
-            class="w-[400px] h-auto"
+            class="w-[500px] h-[570px]"
           />
         </div>
 
@@ -444,9 +578,9 @@
           class="container grid grid-cols-1 md:grid-cols-2 gap-4 p-8 justify-center text-center mx-auto"
         >
           <img
-            src="https://cdn.yamibuy.net/item/5662852f7fafed2952108a341b5d40a1_1200x1200.webp"
+            src="./Photo/img3.png"
             alt=""
-            class="w-auto h-auto"
+            class="w-[500px] h-[570px]"
           />
 
           <p class="leading-12 text-xl text-gray-600">
@@ -742,10 +876,29 @@
                         <li><a href="javascript:;"  class="text-sm text-gray-500">Terms</a></li>
                         <li><a href="javascript:;"  class="text-sm text-gray-500">Privacy</a></li>
                         <li><a href="javascript:;"  class="text-sm text-gray-500">Cookies</a></li>
+
+                        <span id="modeLabel" class="font-semibold" style="color:var(--text);">Light Mode</span>
+                        <div class="theme-toggle ml-2" onclick="toggleTheme()"></div>
+    
                     </ul>
                 </div>
             </div>
         </div>
     </footer>
+
+      <script>
+    let isDark = false;
+
+    function toggleTheme() {
+      isDark = !isDark;
+      document.documentElement.classList.toggle('dark', isDark);
+      document.getElementById('modeLabel').textContent = isDark ? 'Dark Mode' : 'Light Mode';
+    }
+
+    // Keyboard shortcut: press D
+    document.addEventListener('keydown', e => {
+      if (e.key === 'd' || e.key === 'D') toggleTheme();
+    });
+  </script>
   </body>
 </html>
