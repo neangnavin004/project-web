@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kizzz | Home</title>
+    <!-- link exteternal output.css style -->
+    <link rel="stylesheet" href="./src/output.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: '#16a34a',
+            'brand-light': '#22c55e',
+          },
+          keyframes: {
+            'fade-up': { from: { opacity: '0', transform: 'translateY(30px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+            'fade-in': { from: { opacity: '0' }, to: { opacity: '1' } },
+            'float': { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-14px)' } },
+            'spin-slow': { from: { transform: 'rotate(0deg)' }, to: { transform: 'rotate(360deg)' } },
+          },
+          animation: {
+            'fade-up': 'fade-up 0.7s ease forwards',
+            'fade-up-2': 'fade-up 0.7s ease 0.15s forwards',
+            'fade-up-3': 'fade-up 0.7s ease 0.3s forwards',
+            'fade-in': 'fade-in 0.5s ease forwards',
+            'float': 'float 5s ease-in-out infinite',
+            'spin-slow': 'spin-slow 18s linear infinite',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* smooth transitions for dark/light */
+    *, *::before, *::after { transition: background-color 0.3s, border-color 0.3s, color 0.2s; }
+    body { font-family: 'DM Sans', sans-serif; }
+    h1,h2,h3,.font-display { font-family: 'Syne', sans-serif; }
+
+    /* Light mode */
+    :root {
+      --bg: #f8f9fa;
+      --nav-bg: #ffffff;
+      --card-bg: #ffffff;
+      --text: #1a2332;
+      --muted: #6b7280;
+      --border: rgba(0,0,0,0.08);
+    }
+    /* Dark mode */
+    .dark {
+      --bg: #0a0f1a;
+      --nav-bg: #0f1724;
+      --card-bg: #111d2e;
+      --text: #f0f6ff;
+      --muted: #8899aa;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    body { background: var(--bg); color: var(--text); }
+
+    /* Navbar pill */
+    .nav-pill {
+      background: var(--nav-bg);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .dark .nav-pill { box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+
+    /* Cards */
+    .drink-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .drink-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+    .dark .drink-card:hover { box-shadow: 0 16px 40px rgba(0,0,0,0.5); }
+
+    /* Toggle button */
+    .theme-toggle {
+      position: relative;
+      width: 52px; height: 28px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .dark .theme-toggle { background: #22c55e; }
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 22px; height: 22px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .dark .theme-toggle::after { transform: translateX(24px); }
+
+    /* Blob bg */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .dark .blob { opacity: 0.2; }
+
+    /* Decorative ring */
+    .ring-deco {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed rgba(22,163,74,0.25);
+      animation: spin-slow 18s linear infinite;
+    }
+
+    /* Opacity-0 initial for animations */
+    .anim-init { opacity: 0; }
+
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+  </style>
+
+  <body class="min-h-screen overflow-x-hidden">
+    <!-- header (nav) -->
+    <nav class="relative z-50 w-full max-w-7xl mx-auto mt-6 px-4">
+      <div
+        class="bg-white rounded-full px-6 py-6 flex justify-between items-center shadow-lg"
+      >
+        <div class="text-[50px] font-bold text-green-600 tracking-wide">
+          Kizzz
+        </div>
+
+        <div
+          class="hidden md:flex gap-8 text-2xl text-primary-size font-semibold text-gray-700 font-bold"
+        >
+          <a href="../index.html" class="hover:text-green-600">Home </a>
+          <a href="#Product" class="hover:text-green-600"
+            >Product
+          </a>
+          <a href="./pages/about.html" class="hover:text-green-600">About Us</a>
+        </div>
+
+           <!-- Right side -->
+      <div class="flex items-center gap-4 shrink-0">
+        <!-- Dark/light toggle -->
+        <div class="flex items-center gap-2">
+          <!-- Sun icon -->
+          <svg id="icon-sun" class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+          <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode"></div>
+          <!-- Moon icon -->
+          <svg id="icon-moon" class="w-4 h-4" style="color:var(--muted);" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+        </div>
+
+        <a
+          href="https://omerlinks.netlify.app/"
+          class="flex items-center gap-2 text-2xl font-bold text-green-600 font-semibold hover:opacity-70"
+        >
+          Call me
+          <div
+            class="bg-green-600 text-white rounded-full p-1 w-6 h-6 flex items-center justify-center"
+          >
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </div>
+        </a>
+      </div>
+    </nav>
+ 
+
+  <!-- ── HERO ── -->
+  <section class="relative max-w-5xl mx-auto px-6 pt-20 pb-16 text-center overflow-hidden">
+    <div class="blob w-80 h-80 bg-green-400 -top-10 left-1/2 -translate-x-1/2"></div>
+    <div class="ring-deco w-72 h-72 top-0 left-1/2 -translate-x-1/2 animate-spin-slow"></div>
+    <div class="relative z-10">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 mb-6 anim-init animate-fade-up">
+        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+        Our Story
+      </div>
+      <h1 class="font-display text-6xl font-extrabold leading-tight mb-5 anim-init animate-fade-up-2" style="color:var(--text);">
+        We Are <span class="text-green-500">Kizzz</span><br/>Drinks
+      </h1>
+      <p class="text-base max-w-lg mx-auto leading-relaxed anim-init animate-fade-up-3" style="color:var(--muted);">
+        Born from a love of nature and a passion for health, we craft cold-pressed juices and smoothies that fuel your best self — one sip at a time.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── MISSION / VISION CARDS ── -->
+  <section class="max-w-5xl mx-auto px-6 pb-20">
+    <div class="grid grid-cols-3 gap-5">
+      <div class="bg-whitesmoke rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+        <div class="w-12 h-12 rounded-2xl bg-green-100 dark:bg-green-900/40 flex items-center justify-center text-2xl">🌱</div>
+        <h3 class="font-display text-lg font-bold" style="color:var(--text);">Our Mission</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted);">To make healthy, organic beverages accessible to everyone — without compromising on taste, quality, or the environment.</p>
+      </div>
+      <div class="bg-whitesmoke rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+        <div class="w-12 h-12 rounded-2xl bg-green-100 dark:bg-green-900/40 flex items-center justify-center text-2xl">🔭</div>
+        <h3 class="font-display text-lg font-bold" style="color:var(--text);">Our Vision</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted);">A world where every table has a bottle of pure, cold-pressed goodness — and every farm partner thrives alongside us.</p>
+      </div>
+      <div class="bg-whitesmoke rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+        <div class="w-12 h-12 rounded-2xl bg-green-100 dark:bg-green-900/40 flex items-center justify-center text-2xl">💚</div>
+        <h3 class="font-display text-lg font-bold" style="color:var(--text);">Our Values</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted);">Transparency, sustainability, and community. We source locally, package responsibly, and give back with every purchase.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS BANNER ── -->
+  <section class="max-w-5xl mx-auto px-6 pb-20">
+    <div class="rounded-3xl px-10 py-10 relative overflow-hidden flex items-center justify-between gap-6" style="background:var(--card-bg); border:1px solid var(--border);">
+      <div class="blob w-56 h-56 bg-green-400 -right-10 -top-10"></div>
+      <div class="blob w-40 h-40 bg-yellow-300 -left-10 bottom-0"></div>
+      <div class="relative z-10 text-center flex-1">
+        <p class="font-display text-4xl font-extrabold text-green-500">15+</p>
+        <p class="text-sm mt-1" style="color:var(--muted);">Years of freshness</p>
+      </div>
+      <div class="w-px h-12 shrink-0" style="background:var(--border);"></div>
+      <div class="relative z-10 text-center flex-1">
+        <p class="font-display text-4xl font-extrabold text-green-500">200+</p>
+        <p class="text-sm mt-1" style="color:var(--muted);">Unique recipes</p>
+      </div>
+      <div class="w-px h-12 shrink-0" style="background:var(--border);"></div>
+      <div class="relative z-10 text-center flex-1">
+        <p class="font-display text-4xl font-extrabold text-green-500">50K+</p>
+        <p class="text-sm mt-1" style="color:var(--muted);">Happy customers</p>
+      </div>
+      <div class="w-px h-12 shrink-0" style="background:var(--border);"></div>
+      <div class="relative z-10 text-center flex-1">
+        <p class="font-display text-4xl font-extrabold text-green-500">30+</p>
+        <p class="text-sm mt-1" style="color:var(--muted);">Countries served</p>
+      </div>
+      <div class="w-px h-12 shrink-0" style="background:var(--border);"></div>
+      <div class="relative z-10 text-center flex-1">
+        <p class="font-display text-4xl font-extrabold text-green-500">4.9★</p>
+        <p class="text-sm mt-1" style="color:var(--muted);">Average rating</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OUR STORY TIMELINE ── -->
+  <section class="max-w-5xl mx-auto px-6 pb-20">
+    <div class="text-center mb-12">
+      <p class="text-xs font-semibold text-green-500 uppercase tracking-widest mb-2">How we grew</p>
+      <h2 class="font-display text-4xl font-extrabold" style="color:var(--text);">Our Journey</h2>
+    </div>
+    <div class="relative">
+      <!-- Center line -->
+      <div class="absolute left-1/2 -translate-x-px top-0 bottom-0 w-px" style="background:var(--border);"></div>
+
+      <!-- Timeline items -->
+      <div class="flex flex-col gap-10">
+
+        <!-- 2009 -->
+        <div class="flex items-center gap-8">
+          <div class="flex-1 card rounded-2xl p-5 text-right">
+            <p class="text-xs font-bold text-green-500 mb-1">2009</p>
+            <h4 class="font-display text-base font-bold mb-1" style="color:var(--text);">The First Squeeze</h4>
+            <p class="text-xs leading-relaxed" style="color:var(--muted);">Founded in a small kitchen in Phnom Penh with just three fruits and a dream to share healthy drinks with the neighborhood.</p>
+          </div>
+          <div class="w-4 h-4 rounded-full bg-green-500 dot-pulse shrink-0 relative z-10" style="box-shadow:0 0 0 4px rgba(34,197,94,.2);"></div>
+          <div class="flex-1"></div>
+        </div>
+
+        <!-- 2013 -->
+        <div class="flex items-center gap-8">
+          <div class="flex-1"></div>
+          <div class="w-4 h-4 rounded-full bg-green-500 shrink-0 relative z-10" style="box-shadow:0 0 0 4px rgba(34,197,94,.2);"></div>
+          <div class="flex-1 card rounded-2xl p-5">
+            <p class="text-xs font-bold text-green-500 mb-1">2013</p>
+            <h4 class="font-display text-base font-bold mb-1" style="color:var(--text);">First Retail Store</h4>
+            <p class="text-xs leading-relaxed" style="color:var(--muted);">Opened our flagship juice bar downtown. Lines out the door on day one — we knew something special was brewing.</p>
+          </div>
+        </div>
+
+        <!-- 2017 -->
+        <div class="flex items-center gap-8">
+          <div class="flex-1 card rounded-2xl p-5 text-right">
+            <p class="text-xs font-bold text-green-500 mb-1">2017</p>
+            <h4 class="font-display text-base font-bold mb-1" style="color:var(--text);">Going Organic</h4>
+            <p class="text-xs leading-relaxed" style="color:var(--muted);">Partnered with 20+ certified organic farms, pledging to source 100% natural ingredients across all product lines.</p>
+          </div>
+          <div class="w-4 h-4 rounded-full bg-green-500 shrink-0 relative z-10" style="box-shadow:0 0 0 4px rgba(34,197,94,.2);"></div>
+          <div class="flex-1"></div>
+        </div>
+
+        <!-- 2022 -->
+        <div class="flex items-center gap-8">
+          <div class="flex-1"></div>
+          <div class="w-4 h-4 rounded-full bg-green-500 shrink-0 relative z-10" style="box-shadow:0 0 0 4px rgba(34,197,94,.2);"></div>
+          <div class="flex-1 card rounded-2xl p-5">
+            <p class="text-xs font-bold text-green-500 mb-1">2022</p>
+            <h4 class="font-display text-base font-bold mb-1" style="color:var(--text);">Global Reach</h4>
+            <p class="text-xs leading-relaxed" style="color:var(--muted);">Launched international shipping to 30+ countries. Our cold-pressed goodness is now enjoyed on six continents.</p>
+          </div>
+        </div>
+
+        <!-- 2026 -->
+        <div class="flex items-center gap-8">
+          <div class="flex-1 card rounded-2xl p-5 text-right" style="border-color:rgba(34,197,94,.35);">
+            <p class="text-xs font-bold text-green-500 mb-1">2026 · Now</p>
+            <h4 class="font-display text-base font-bold mb-1" style="color:var(--text);">50,000 Happy Sippers</h4>
+            <p class="text-xs leading-relaxed" style="color:var(--muted);">Celebrating 50K loyal customers and launching our new zero-waste packaging initiative. The best is still to come.</p>
+          </div>
+          <div class="w-5 h-5 rounded-full bg-green-500 dot-pulse shrink-0 relative z-10 ring-2 ring-green-300 dark:ring-green-700"></div>
+          <div class="flex-1"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TEAM ── -->
+  <section class="max-w-5xl mx-auto px-6 pb-20">
+    <div class="text-center mb-12">
+      <p class="text-3xl font-semibold text-green-500 uppercase tracking-widest mb-2">The People</p>
+      <h2 class="font-display text-4xl font-extrabold" style="color:var(--text);">Meet the Team</h2>
+    </div>
+    <div class="grid grid-cols-4 gap-5">
+
+      <div class="team-card rounded-3xl p-5 flex flex-col items-center text-center bg-whitesmoke rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+        <div class="w-40 h-50 rounded-2xl mb-10 flex items-center justify-center text-4xl bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/40 dark:to-green-800/30"><img src="../Photo/Navin.png" class="w-[200px] h-[200px] alt="" "></div>
+        <h4 class="font-display text-xl font-bold" style="color:var(--text);">Neang Navin</h4>
+        <p class="text-sm text-green-500 font-semibold mt-0.5">Founder & CEO</p>
+        <p class="text-sm mt-2 leading-relaxed" style="color:var(--muted);">The original squeezer. Turned a kitchen hobby into a global brand.</p>
+      </div>
+
+      <div class="team-card rounded-3xl p-5 flex flex-col items-center text-center bg-whitesmoke rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+        <div class="w-40 h-50 rounded-2xl mb-10 flex items-center justify-center text-4xl bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900/40 dark:to-yellow-800/30"><img src="../Photo/chanthim.png"  class="w-[220px] h-[200px] alt=""></div>
+        <h4 class="font-display text-xl font-bold" style="color:var(--text);">Yem Chanthim</h4>
+        <p class="text-sm text-green-500 font-semibold mt-0.5">Head of R&D</p>
+        <p class="text-sm mt-2 leading-relaxed" style="color:var(--muted);">Creates every new recipe. Obsessed with nutrient density and flavor balance.</p>
+      </div>
+
+      <div class="team-card rounded-3xl p-5 flex flex-col items-center text-center bg-whitesmoke rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+        <div class="w-40 h-50 rounded-2xl mb-10 flex items-center justify-center text-4xl bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/30"><img src="../Photo/banhrith.png"  class="w-[220px] h-[200px] alt=""></div>
+        <h4 class="font-display text-xl font-bold" style="color:var(--text);">Lim Chanpanharith</h4>
+        <p class="text-sm text-green-500 font-semibold mt-0.5">COO</p>
+        <p class="text-sm mt-2 leading-relaxed" style="color:var(--muted);">Keeps the whole machine running smoothly — from farm to fridge.</p>
+      </div>
+
+      <div class="team-card rounded-3xl p-5 flex flex-col items-center text-center bg-whitesmoke rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+        <div class="w-40 h-50 rounded-2xl mb-10 flex items-center justify-center text-4xl bg-gradient-to-br from-pink-100 to-pink-200 dark:from-pink-900/40 dark:to-pink-800/30"><img src="../Photo/Vanny.png"  class="w-[200px] h-[200px] alt=""></div>
+        <h4 class="font-display text-xl font-bold" style="color:var(--text);">Leav Vanny</h4>
+        <p class="text-sm text-green-500 font-semibold mt-0.5">Creative Director</p>
+        <p class="text-sm mt-2 leading-relaxed" style="color:var(--muted);">The brain behind our look. Makes healthy feel irresistibly cool.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="max-w-5xl mx-auto px-6 pb-24">
+    <div class="rounded-3xl px-12 py-14 text-center relative overflow-hidden" style="background:var(--card-bg); border:1px solid var(--border);">
+      <div class="blob w-72 h-72 bg-green-500 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+      <div class="relative z-10">
+        <p class="text-xs font-semibold text-green-500 uppercase tracking-widest mb-3">Join the family</p>
+        <h2 class="font-display text-4xl font-extrabold mb-4" style="color:var(--text);">Ready to taste the<br/>difference?</h2>
+        <p class="text-sm mb-8 max-w-sm mx-auto" style="color:var(--muted);">Order your first case, join 50,000 happy sippers, and feel the Kizzz effect.</p>
+        <div class="flex items-center justify-center gap-4">
+          <button class="bg-green-600 hover:bg-green-500 text-white font-bold text-sm px-8 py-3.5 rounded-xl shadow-lg shadow-green-500/25 transition-all hover:scale-105">
+            Shop Now →
+          </button>
+          <button class="text-sm font-semibold px-6 py-3.5 rounded-xl transition-colors" style="color:var(--text); border:1px solid var(--border);">
+            Contact Us
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="border-t py-8 px-6" style="border-color:var(--border);">
+    <div class="max-w-5xl mx-auto flex items-center justify-between">
+      <span class="font-display text-xl font-bold text-green-500">Kizzz</span>
+      <p class="text-xs" style="color:var(--muted);">© 2026 Kizzz Drinks. All rights reserved.</p>
+      <div class="flex items-center gap-3">
+        <span class="text-xs" style="color:var(--muted);" id="modeLabel">Light Mode</span>
+        <div class="theme-toggle" onclick="toggleTheme()"></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let isDark = false;
+    function toggleTheme() {
+      isDark = !isDark;
+      document.documentElement.classList.toggle('dark', isDark);
+      document.getElementById('modeLabel').textContent = isDark ? 'Dark Mode' : 'Light Mode';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'd' || e.key === 'D') toggleTheme(); });
+  </script>
+</body>
+</html>
