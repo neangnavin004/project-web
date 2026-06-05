@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3D Card Hover</title>
+  <link rel="stylesheet" href="../src/output.css">
+
+  <style> *{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#e9f0f2;
+}
+
+.container{
+  display:flex;
+  gap:40px;
+}
+
+.card{
+  width:280px;
+  height:380px;
+  background:#fff;
+  border-radius:20px;
+  position:relative;
+
+  transform-style:preserve-3d;
+  transition:0.1s;
+
+  box-shadow:0 15px 35px rgba(0,0,0,0.15);
+  overflow:hidden;
+}
+
+.circle{
+  width:120px;
+  height:120px;
+  background:linear-gradient(135deg,#00ff99,#00ccff);
+  border-radius:50%;
+
+  position:absolute;
+  top:20px;
+  right:20px;
+
+  transform:translateZ(30px);
+}
+
+.shoe{
+  width:250px;
+
+  position:absolute;
+  top:40px;
+  left:15px;
+
+  transition:0.5s;
+  transform:translateZ(50px);
+}
+
+.card:hover .shoe{
+  transform:
+    translateZ(80px)
+    rotate(-15deg)
+    scale(1.1);
+}
+
+.content{
+  position:absolute;
+  bottom:30px;
+  left:20px;
+
+  transform:translateZ(40px);
+}
+
+.content h2{
+  font-size:24px;
+  margin-bottom:10px;
+}
+
+.content p{
+  color:#555;
+  line-height:1.5;
+}
+
+
+</style>
+
+</head>
+<body>
+
+
+<div class="container">
+
+  <div class="card">
+      <h2>Samba OG Shoes</h2>
+      <p>Modern stylish shoes with 3D hover effect.</p>
+    <div class="bg-text"></div>
+
+    <img class="shoe" src="../Photo/shoes.png" data-blue="../Photo/shoes1.png" data-green="../Photo/shoes2.png">
+
+    <div class="colors">
+      <span class="blue" data-blue="blue"></span>
+      <span class="green" data-green="green"></span>
+      <span class="blue" data-blue="blue"></span>
+      
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="circle"></div>
+
+    <img src="https://pngimg.com/d/running_shoes_PNG5821.png" class="shoe">
+
+    <div class="content">
+      <h2>Handball Spezial</h2>
+      <p>Interactive product card animation.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="circle"></div>
+
+    <img src="https://pngimg.com/d/running_shoes_PNG5825.png" class="shoe">
+
+    <div class="content">
+      <h2>Adizero Evo SL</h2>
+      <p>Cool floating shoe animation effect.</p>
+    </div>
+  </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
+
